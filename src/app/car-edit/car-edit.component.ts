@@ -32,8 +32,8 @@ export class CarEditComponent implements OnInit,OnDestroy {
           if(car)
           {
             this.car = car;
-            this.car.herf = car._links.car.href;
-            this.hrefcon = car._links.car.href;
+            this.car.herf = car.id;
+            this.hrefcon = car.id;
             this.giphyService.get(car.name).subscribe(url => car.giphyUrl = url);
           }
           else 
@@ -61,14 +61,14 @@ export class CarEditComponent implements OnInit,OnDestroy {
     this.carService.save(ngForm).subscribe(result => 
       {
         this.gotoList();
-      },error => console.error(error));
+      },error => {console.error("Error While Update Item")});
   }
 
   remove(href)
   {
     this.carService.remove(href).subscribe(result => {
        this.gotoList();
-      },error => console.error(error));
+      },error => console.error("Error while Delete Item"));
   }
 
 }
